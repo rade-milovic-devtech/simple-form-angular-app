@@ -8,45 +8,84 @@
 
   <div class="row justify-content-md-center">
     <div class="col-md-6">
-      <form novalidate="">
-        <div class="mb-3">
+      <form #registrationForm="ngForm">
+        <div class="form-group">
           <label for="name">Name</label>
-          <input type="text" class="form-control" id="name" />
-          <div class="invalid-feedback text-danger">
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            required
+            [ngModel]="name"
+            #nameInput="ngModel"
+          />
+          <div
+            *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)"
+            class="text-danger"
+          >
             Your name is required.
           </div>
         </div>
 
-        <div class="mb-3">
+        <div class="form-group">
           <label for="email">Email</label>
           <div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text">@</span>
             </div>
-            <input type="email" class="form-control" id="email" required="" />
-            <div class="invalid-feedback text-danger" style="width: 100%;">
+            <input
+              type="email"
+              class="form-control form-control-email"
+              name="email"
+              required
+              email
+              [ngModel]="email"
+              #emailInput="ngModel"
+            />
+            <div
+              *ngIf="
+                emailInput.invalid && (emailInput.dirty || emailInput.touched)
+              "
+              class="text-danger"
+              style="width: 100%;"
+            >
               Please enter a valid email address.
             </div>
           </div>
         </div>
 
-        <div class="mb-3">
+        <div class="form-group">
           <label for="password">Password</label>
           <input
             type="password"
             class="form-control"
-            id="password"
-            required=""
+            name="password"
+            required
+            pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,20}$"
+            [ngModel]="password"
+            #passwordInput="ngModel"
           />
-          <div class="invalid-feedback text-danger">
-            Please enter a password which is at least 6 characters long,
-            contains upercase letters, number and a special symbol.
+          <div
+            *ngIf="
+              passwordInput.invalid &&
+              (passwordInput.dirty || passwordInput.touched)
+            "
+            class="text-danger"
+          >
+            Please enter a password which has between 6 and 20 characters, at
+            least one uppercase letter, one lowercase letter, one number and one
+            special character.
           </div>
         </div>
 
         <hr class="mb-4" />
 
-        <button class="btn btn-primary btn-lg btn-block" type="submit">
+        <button
+          class="btn btn-primary btn-lg btn-block"
+          type="submit"
+          [disabled]="!registrationForm.form.valid"
+        >
           Continue
         </button>
       </form>
