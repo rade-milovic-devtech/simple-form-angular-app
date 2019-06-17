@@ -4,9 +4,10 @@ import { NgModule } from "@angular/core";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import { UniqueEmailValidatorDirective } from './unique-email-validator.directive';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, UniqueEmailValidatorDirective],
   imports: [BrowserModule, FormsModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent]

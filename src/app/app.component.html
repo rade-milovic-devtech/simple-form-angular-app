@@ -40,7 +40,9 @@
               name="email"
               required
               email
+              appUniqueEmail
               [ngModel]="email"
+              [ngModelOptions]="{ updateOn: 'blur' }"
               #emailInput="ngModel"
             />
             <div
@@ -50,7 +52,8 @@
               class="text-danger"
               style="width: 100%;"
             >
-              Please enter a valid email address.
+              <div *ngIf="emailInput.errors.required || emailInput.errors.email">Please enter a properly formatted email address.</div>
+              <div *ngIf="emailInput.errors.uniqueEmail">{{emailInput.errors.uniqueEmail.value}} is taken.</div>
             </div>
           </div>
         </div>
