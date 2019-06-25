@@ -8,7 +8,7 @@
 
   <div class="row justify-content-md-center">
     <div class="col-md-6">
-      <form #registrationForm="ngForm">
+      <form (ngSubmit)="onSubmit()" #registrationForm="ngForm">
         <div class="form-group">
           <label for="name">Name</label>
           <input
@@ -52,8 +52,14 @@
               class="text-danger"
               style="width: 100%;"
             >
-              <div *ngIf="emailInput.errors.required || emailInput.errors.email">Please enter a properly formatted email address.</div>
-              <div *ngIf="emailInput.errors.uniqueEmail">{{emailInput.errors.uniqueEmail.value}} is taken.</div>
+              <div
+                *ngIf="emailInput.errors.required || emailInput.errors.email"
+              >
+                Please enter a properly formatted email address.
+              </div>
+              <div *ngIf="emailInput.errors.uniqueEmail">
+                {{ emailInput.errors.uniqueEmail.value }} is taken.
+              </div>
             </div>
           </div>
         </div>
